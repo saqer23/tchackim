@@ -5,7 +5,7 @@ const { verifyToken , verifyUsrt} = require('../utils/verifyToken.js')
 const router = express.Router();
 
 
-router.post("/create",verifyUsrt,(req,res)=>{
+router.post("/create",verifyToken,(req,res)=>{
     pakgeController.createPakge(req.body).then(data => res.status(200).json(data))
 });
 router.get("/",verifyToken,(req,res)=>{
@@ -15,10 +15,10 @@ router.get("/",verifyToken,(req,res)=>{
 router.get("/:pakgeId",verifyToken,(req,res)=>{
     pakgeController.getPakge(req.params.pakgeId).then(data => res.status(200).json(data))
 });;
-router.put("/:pakgeId",verifyUsrt,(req,res)=>{
+router.put("/:pakgeId",verifyToken,(req,res)=>{
     pakgeController.updatePakge(req).then(data => res.status(200).json(data))
 });;
-router.delete("/:pakgeId",verifyUsrt,(req,res)=>{
+router.delete("/:pakgeId",verifyToken,(req,res)=>{
     pakgeController.deletePakge(req.params.pakgeId).then(data => res.status(200).json(data))
 });
 
