@@ -6,15 +6,18 @@ exports.postRoom = async (req, res, next) => {
     try {
       const user1 = req.user.id
       const user2 = req.body.userId
-      const room = await Room.findOne({ users: { $in: [user1, user2] }, type: 1 })
-      console.log(room)
+      // console.log(user2);
+      const room = await Room.findOne({ users:  [user1, user2] , type: 1 })
+      // console.log("room>>>>>>>",room)
       if (room) {
         res.status(401).json({
           message: 'You Already Created Room with this User.'
         })
+        return 
+
       }
       const currentUser = await User.findById(user1)
-      const otherUser = await User.findById(user2).populate('profile').exec()
+      const otherUser = await User.findById(user2).exec()
     const _roomName = req.body.roomName ? req.body.roomName : ''
               const type = req.body.type
               const users = []
