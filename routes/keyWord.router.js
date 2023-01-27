@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 
-router.post("/create",verifyUsrt,(req,res)=>{
+router.post("/create",verifyToken,(req,res)=>{
     keyWordController.createKeyWord(req.body).then(data => res.status(200).json(data))
 });
 router.get("/",verifyToken,(req,res)=>{
@@ -16,10 +16,10 @@ router.get("/",verifyToken,(req,res)=>{
 router.get("/:keyWordId",verifyToken,(req,res)=>{
     keyWordController.getKeyWord(req.params.keyWordId).then(data => res.status(200).json(data))
 });;
-router.put("/:keyWordId",verifyUsrt,(req,res)=>{
+router.put("/:keyWordId",verifyToken,(req,res)=>{
     keyWordController.updateKeyWord(req).then(data => res.status(200).json(data))
 });;
-router.delete("/:keyWordId",verifyUsrt,(req,res)=>{
+router.delete("/:keyWordId",verifyToken,(req,res)=>{
     keyWordController.deleteKeyWord(req.params.keyWordId).then(data => res.status(200).json(data))
 });
 
