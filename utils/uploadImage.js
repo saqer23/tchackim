@@ -18,7 +18,9 @@ const fileFilter = (req,file,cd) =>{
     }
 }
 const upload = multer({storage:storge,fileFilter:fileFilter}).array('productImg',8);
+const uploadProfile = multer({storage:storge,fileFilter:fileFilter}).single('profileImg');
 
 module.exports = {
-    upload
+    upload,
+    uploadProfile
 }

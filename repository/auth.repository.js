@@ -11,7 +11,6 @@ class AuthRepository {
         let folwer = {}
         try {
             data = await User.create(user);
-            console.log(follwers);
             folwer = await follwers.createFollwers(data)
             wallte = await wallteRepository.createWallet(data)
         } catch(err) {
@@ -30,10 +29,7 @@ class AuthRepository {
         let user1 = {};
         console.log(user.body)
         try {
-            user1 = await (await User.findOne({phoneNo:user.params.userId})).populated({path:"packgeId"})
-            if(user1.packgeId){
-                user.body.packgeId = user1.packgeId + user.body.packgeId
-            }
+            user1 = await (await User.findOne({phoneNo:user.params.userId}))
             data = await User.findByIdAndUpdate(user1._id,{$set:user.body})
 
         } catch(err) {

@@ -32,6 +32,9 @@ const UserSchema = new mongoose.Schema({
     isSubAdmin:{
         type:[String]
     },
+    profileImg:{
+        type:String
+    }
 },{ timestamps:true });
 
 const User = mongoose.model("User",UserSchema);

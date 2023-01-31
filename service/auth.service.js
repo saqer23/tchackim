@@ -5,18 +5,26 @@ const jwt = require("jsonwebtoken");
 class AuthService{
     async register(user){
         const salt = await bcrypt.genSaltSync(10)
-        const hash = bcrypt.hashSync(user.password, salt)
-
+        const hash = bcrypt.hashSync(user.body.password, salt)
+        try{
         const auth = {
-            email:user.email,
-            firstName:user.firstName,
-            lastName:user.lastName,
-            phoneNo:user.phoneNo,
-            address:user.address,
+            email:user.body.email,
+            firstName:user.body.firstName,
+            lastName:user.body.lastName,
+            phoneNo:user.body.phoneNo,
+            address:user.body.address,
             password:hash,
-            packgeId:user.packgeId,
+            packgeId:user.body.packgeId,
+            }
+        if(user.file){
+            auth.profileImg = user.file.destination+user.file.filename
         }
         return await authRepository.register(auth);
+    }catch(err){
+        console.log(err);
+        return 'err'
+    }
+        
     }
 
     async login(user){
@@ -45,6 +53,9 @@ class AuthService{
             phoneNo:user.body.phoneNo,
             address:user.body.address,
             packgeId:user.packgeId,
+        }
+        if(user.file){
+            auth.profileImg = user.file.destination+user.file.filename
         }
         user.body = auth
         return await authRepository.updateUser(user);
