@@ -23,8 +23,11 @@ class AuthService{
     }catch(err){
         console.log(err);
         return 'err'
+    }    
     }
-        
+
+    async getUserById(userId){
+        return authRepository.getUserById(userId)
     }
 
     async login(user){
@@ -45,7 +48,6 @@ class AuthService{
     }
 
     async updateUser(user) {
-
         const auth = {
             email:user.body.email,
             firstName:user.body.firstName,

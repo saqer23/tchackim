@@ -19,6 +19,17 @@ class AuthRepository {
         return data;
     }
 
+
+    async getUserById(userId){
+        let data = {}
+        try{
+            data = await User.findById(userId)
+        }catch(err){
+            console.log(err);
+        }
+        return data
+    }
+
     async login(user) {
         const auth = await User.findOne({phoneNo:user.phoneNo});
         return auth;

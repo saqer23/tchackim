@@ -14,6 +14,9 @@ router.post("/login",(req,res)=>{
 router.put("/:userId",uploadProfile,(req,res)=>{
     authController.updateUser(req).then(data => res.status(200).json(data))
 });
+router.get("/:userId",(req,res)=>{
+    authController.getUserById(req.params.userId).then(data => res.status(200).json(data))
+});
 //forgetPassword
 router.put("/forget-password/:userId",(req,res)=>{
     authController.forgetPassword(req).then(data => res.status(200).json(data))

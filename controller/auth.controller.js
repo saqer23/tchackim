@@ -9,6 +9,10 @@ class AuthController{
         return await authService.login(user)
     }
 
+    async getUserById(userId){
+        return authService.getUserById(userId)
+    }
+
     async updateUser(user) {
         return await authService.updateUser(user);
     }
