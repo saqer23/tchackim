@@ -14,11 +14,11 @@ class AuthService{
             phoneNo:user.body.phoneNo,
             address:user.body.address,
             password:hash,
-            packgeId:user.body.packgeId,
+            profileImg:"no",
             }
-        if(user.file){
-            auth.profileImg = user.file.destination+user.file.filename
-        }
+        // if(user.file){
+        //     auth.profileImg = user.file.destination+user.file.filename
+        // }
         return await authRepository.register(auth);
     }catch(err){
         console.log(err);

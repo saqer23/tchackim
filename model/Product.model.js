@@ -21,10 +21,18 @@ const ProductSchema = new mongoose.Schema({
         type:String,
     },
     productCode:{
+        type:[[String]],
+        default:[]
+    },
+    oldNew:{
         type:String,
     },
+    deliveryType:{
+        type:[String]
+    },
     rate:{
-        type: [String]
+        type: [String],
+        default:[]
     },
     endDate:{
         type:String

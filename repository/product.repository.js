@@ -45,7 +45,9 @@ class ProductRepository {
                 categoryId:product.body.categoryId,
                 keyWordId:product.body.keyWordId,
                 type:product.body.type,
-                endDate:product.body.endDate
+                endDate:product.body.endDate,
+                oldNew:product.body.oldNew,
+                deliveryType:product.body.deliveryType
             });
         } catch(err) {
             console.log('Error::' + err);
