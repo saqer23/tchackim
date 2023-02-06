@@ -39,7 +39,9 @@ class AuthRepository {
         let data = {};
         let user1 = {};
         try {
-            user1 = await User.findOne({phoneNo:user.body.phoneNo})
+            console.log(user.body.phoneNo);
+            let phoneNo = user.body.phoneNo
+            user1 = await (await User.findOne({phoneNo:phoneNo}))
             user1.firstName = user.body.firstName
             user1.lastName = user.body.lastName
             user1.address = user.body.address
@@ -48,7 +50,7 @@ class AuthRepository {
             
             await user1.save()
         } catch(err) {
-            console.log('Error::' + err);
+            return {error:err}
         }
         return user1;
     }
