@@ -52,9 +52,8 @@ class AuthService{
             email:user.body.email,
             firstName:user.body.firstName,
             lastName:user.body.lastName,
-            phoneNo:user.body.phoneNo,
+            phoneNo:user.params.userId,
             address:user.body.address,
-            packgeId:user.packgeId,
         }
         if(user.file){
             auth.profileImg = user.file.destination+user.file.filename

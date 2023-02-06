@@ -38,15 +38,19 @@ class AuthRepository {
     async updateUser(user) {
         let data = {};
         let user1 = {};
-        console.log(user.body)
         try {
-            user1 = await (await User.findOne({phoneNo:user.params.userId}))
-            data = await User.findByIdAndUpdate(user1._id,{$set:user.body})
-
+            user1 = await User.findOne({phoneNo:user.body.phoneNo})
+            user1.firstName = user.body.firstName
+            user1.lastName = user.body.lastName
+            user1.address = user.body.address
+            user1.profileImg = user.body.profileImg
+            user1.email = user.body.email
+            
+            await user1.save()
         } catch(err) {
             console.log('Error::' + err);
         }
-        return data;
+        return user1;
     }
 }
 
