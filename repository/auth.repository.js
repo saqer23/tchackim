@@ -45,7 +45,9 @@ class AuthRepository {
             user1.firstName = user.body.firstName
             user1.lastName = user.body.lastName
             user1.address = user.body.address
-            user1.profileImg = user.body.profileImg
+            if(user.file){
+                user1.profileImg = user.body.profileImg
+            }
             user1.email = user.body.email
             
             await user1.save()
