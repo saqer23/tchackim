@@ -1,6 +1,7 @@
 const Message = require('../model/Message.model.js')
 const User = require('../model/User.model')
 const io = require('../socket')
+const Room = require('../model/Room.model.js')
 
 exports.postMessage = async (req, res, next) => {
     try {
@@ -18,13 +19,15 @@ exports.postMessage = async (req, res, next) => {
         content,
         room
       })
+      const countRoom = await Room.findById(room)
+      countRoom.unreadCount += 1
+      await countRoom.save() 
   
       const resMsg = await message.save()
       const {sender, ...otherRes} = resMsg._doc
       const userinfo = await User.findById(user).exec()
       const data = {sender: userinfo, ...otherRes}
       const socket = await io.getIO().emit('chat', { action: 'create', message: data })
-      console.log('socket: ', socket)
       res.status(201).json({
         message: 'Successfully Added a Message',
         data
@@ -39,11 +42,13 @@ exports.postMessage = async (req, res, next) => {
   exports.getMessages = async (req, res, next) => {
     try {
       const room = req.params.roomId
-      console.log(room)
       const data = await Message.find({ room:room }).populate({
         path: 'sender'
       }).exec()
-  
+      
+      const countRoom = await Room.findById(room)
+      countRoom.unreadCount = 0
+      await countRoom.save() 
       res.status(200).json({
         message: 'Successfully Fteched Messages',
         data

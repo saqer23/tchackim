@@ -6,9 +6,7 @@ exports.postRoom = async (req, res, next) => {
     try {
       const user1 = req.user.id
       const user2 = req.body.userId
-      // console.log(user2);
       const room = await Room.findOne({ users:  [user1, user2] , type: 1 })
-      // console.log("room>>>>>>>",room)
       if (room) {
         res.status(401).json({
           message: 'You Already Created Room with this User.'
@@ -31,7 +29,6 @@ exports.postRoom = async (req, res, next) => {
               })
               const resRoom = await room1.save()
               const {roomName, ..._room} = resRoom._doc
-              console.log('here');
               res.status(201).json({
                 message: 'Successfully Added a Room',
                 // room: {
@@ -76,8 +73,14 @@ exports.postRoom = async (req, res, next) => {
       let room
       if (roomId) {
         room = await Room.findById(roomId).populate('messages').exec()
+        
+        room.unreadCount = 0
+        await room.save() 
       } else if (user1 && user2) {
         room = await Room.find({ users, type }).populate('messages').exec()
+        
+        room.unreadCount = 0
+        await room.save()
       } else {
         return res.status(404).json({
           message: 'Somrthing Wrong Happend',
