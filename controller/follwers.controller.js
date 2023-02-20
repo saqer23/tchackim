@@ -16,7 +16,7 @@ class FollwersController{
         try{
             data = await (await Follwers.findOne({userId:req.user.id})).populate({path:"userId users"})
             if(await (await Follwers.findOne({users:req.user.id}))){
-                data1 = await (await Follwers.findOne({users:req.user.id})).populate({path:"userId users"})
+                data1 = await (await Follwers.find({users:req.user.id}))
 
             }
 
@@ -31,7 +31,7 @@ class FollwersController{
         try{
             data = await Follwers.findOne({userId:id}).populate({path:"userId users"})
             if(await (await Follwers.findOne({users:id}))){
-                data1 = await (await Follwers.findOne({users:id})).populate({path:"users"})
+                data1 = await (await Follwers.find({users:id}))
             }
         }catch{
             throw Error('something went error')
