@@ -23,7 +23,7 @@ class AuthRepository {
     async getUserById(userId){
         let data = {}
         try{
-            data = await User.findById(userId)
+            data = (await User.findById(userId)).populate({path:'packgeId'})
         }catch(err){
             console.log(err);
         }

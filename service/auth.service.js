@@ -1,9 +1,16 @@
 const authRepository  = require('../repository/auth.repository.js');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const packge = require('../repository/pakge.repository.js')
 
 class AuthService{
     async register(user){
+        const pk = await packge.createPakge({
+            pakgeName:'free',
+            pakgePrice:0,
+            pakgePeriod:new Date,
+            packgeAmount:2
+        })
         const salt = await bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(user.body.password, salt)
         try{
@@ -13,6 +20,7 @@ class AuthService{
             lastName:user.body.lastName,
             phoneNo:user.body.phoneNo,
             address:user.body.address,
+            packgeId:pk._id,
             password:hash,
             profileImg:"no",
             }

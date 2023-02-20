@@ -34,6 +34,10 @@ const UserSchema = new mongoose.Schema({
     },
     profileImg:{
         type:String
+    },
+    packgeId:{
+        type:mongoose.Types.ObjectId,
+        ref:'Pakge'
     }
 },{ timestamps:true });
 
