@@ -47,7 +47,9 @@ class ProductRepository {
                 type:product.body.type,
                 endDate:product.body.endDate,
                 oldNew:product.body.oldNew,
-                deliveryType:product.body.deliveryType
+                deliveryType:product.body.deliveryType,
+                shippingAllow:product.body.shippingAllow,
+                chatAllow:product.body.chatAllow
             });
         } catch(err) {
             console.log('Error::' + err);

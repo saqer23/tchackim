@@ -24,6 +24,7 @@ const follwersRoute = require('./routes/follwers.router.js');
 const stripeRoute = require('./routes/stripe.payment.router.js');
 const roomRoute = require('./routes/room.router.js');
 const messageRoute = require('./routes/message.router.js');
+const notificationRoute = require('./routes/notification.router.js');
 
 
 require('dotenv').config()
@@ -75,6 +76,7 @@ const connect = async () =>{
 
 // route
 app.use("/auth",authRoute);
+app.use("/notification",notificationRoute);
 app.use("/store",storeRoute);
 app.use("/category",categoryRoute);
 app.use("/key_word",keyWordRoute);
