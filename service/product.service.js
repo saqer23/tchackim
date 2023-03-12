@@ -25,6 +25,13 @@ class ProductService {
     async getProduct(productId) {
         return await productRepository.getProduct(productId);
     }
+    async getProductsSortedBig(productId) {
+        return await productRepository.getProductsSortedBig(productId);
+    }
+
+    async getProductsSortedSmall(productId) {
+        return await productRepository.getProductsSortedSmall(productId);
+    }
 }
 
 module.exports = new ProductService();

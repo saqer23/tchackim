@@ -16,6 +16,14 @@ router.post("/create",verifyToken,upload,(req,res)=>{
 router.get("/",verifyToken,(req,res)=>{
     productController.getProducts().then(data => res.status(200).json(data))
 });
+
+router.get("/great",verifyToken,(req,res)=>{
+    productController.getProductsSortedBig().then(data => res.status(200).json(data))
+});
+
+router.get("/smaller",verifyToken,(req,res)=>{
+    productController.getProductsSortedSmall().then(data => res.status(200).json(data))
+});
 ;
 router.get("/:productId",verifyToken,(req,res)=>{
     productController.getProduct(req.params.productId).then(data => res.status(200).json(data))

@@ -24,5 +24,13 @@ class ProductController {
     async getProduct(productId) {
         return await productService.getProduct(productId);
     }
+
+    async getProductsSortedBig() {
+        return await productService.getProductsSortedBig();
+    }
+
+    async getProductsSortedSmall() {
+        return await productService.getProductsSortedSmall();
+    }
 }
 module.exports = new ProductController();
