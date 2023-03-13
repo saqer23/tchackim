@@ -24,6 +24,9 @@ router.get("/great",verifyToken,(req,res)=>{
 router.get("/smaller",verifyToken,(req,res)=>{
     productController.getProductsSortedSmall().then(data => res.status(200).json(data))
 });
+router.get("/fillter",verifyToken,(req,res)=>{
+    productController.getProductsQurey(req).then(data => res.status(200).json(data))
+});
 ;
 router.get("/:productId",verifyToken,(req,res)=>{
     productController.getProduct(req.params.productId).then(data => res.status(200).json(data))

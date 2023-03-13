@@ -92,7 +92,13 @@ const ProductSchema = new mongoose.Schema({
             }
         }]
     }
-}, { timestamps: true });
+}, { timestamps:true,toJSON: { virtuals: true }, toObject: { virtuals: true } });
+
+ProductSchema.virtual('location',{
+    ref:"Location",
+    localField:"_id",
+    foreignField:"product",
+})
 
 const Product = mongoose.model("Product", ProductSchema);
 

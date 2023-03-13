@@ -32,5 +32,8 @@ class ProductController {
     async getProductsSortedSmall() {
         return await productService.getProductsSortedSmall();
     }
+    async getProductsQurey(req) {
+        return await productService.getProductsQurey(req);
+    }
 }
 module.exports = new ProductController();

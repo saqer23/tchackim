@@ -25,12 +25,15 @@ class ProductService {
     async getProduct(productId) {
         return await productRepository.getProduct(productId);
     }
-    async getProductsSortedBig(productId) {
-        return await productRepository.getProductsSortedBig(productId);
+    async getProductsSortedBig() {
+        return await productRepository.getProductsSortedBig();
     }
 
-    async getProductsSortedSmall(productId) {
-        return await productRepository.getProductsSortedSmall(productId);
+    async getProductsSortedSmall() {
+        return await productRepository.getProductsSortedSmall();
+    }
+    async getProductsQurey(req) {
+        return await productRepository.getProductsQurey(req);
     }
 }
 

@@ -88,14 +88,57 @@ class ProductRepository {
     }
 
     async getProductsSortedBig() {
-        return await Product.find({}, null, {sort: {price: 1}})
+        return await Product.find({}, null, { sort: { price: 1 } }).populate({ path: "categoryId userId keyWordId storeId" });
     }
 
     async getProductsSortedSmall() {
-        return await Product.find({}, null, {sort: {price: -1}})
+        return await Product.find({}, null, { sort: { price: -1 } }).populate({ path: "categoryId userId keyWordId storeId" });
     }
+    async getProductsQurey(req) {
+        let { priceG, priceL, city, circle } = req.body
+        let products = []
+        let product = {}
+        if (!priceG) {
+            priceG = 0
+        }
+        if (!priceL) {
+            priceL = 99999999999
+        }
 
+        const prod = await Product.find({
+            price: { $lte: priceL, $gte: priceG }
+        }).populate({ path: "categoryId userId keyWordId storeId location" });
 
+        if (circle && city) {
+            for (let i in prod) {
+                for (let j in prod[i].location) {
+                    if ((city === prod[i].location[j].city) && (circle === prod[i].location[j].circle)) {
+                        products.push(prod[i])
+                    }
+                }
+            }
+        } else if (city) {
+            for (let i in prod) {
+                for (let j in prod[i].location) {
+                    if ((city === prod[i].location[j].city)) {
+                        products.push(prod[i])
+                    }
+                }
+            }
+        } else if (circle) {
+            for (let i in prod) {
+                for (let j in prod[i].location) {
+                    if ((circle === prod[i].location[j].circle)) {
+                        products.push(prod[i])
+                    }
+                }
+            }
+        }else{
+            return prod
+        }
+
+        return products
+    }
 }
 
 module.exports = new ProductRepository();
