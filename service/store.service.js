@@ -23,6 +23,9 @@ class StoreService {
     async getStore(storeId) {
         return await storeRepository.getStore(storeId);
     }
+    async getByQuery(query) {
+        return await storeRepository.getByQuery(query);
+    }
 }
 
 module.exports = new StoreService();

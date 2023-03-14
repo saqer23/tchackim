@@ -34,6 +34,9 @@ router.post("/create",verifyToken,upload,(req,res)=>{
 router.get("/",verifyToken,(req,res)=>{
     storeController.getStores().then(data => res.status(200).json(data))
 });
+router.get("/search",verifyToken,(req,res)=>{
+    storeController.getByQuery(req.query).then(data => res.status(200).json(data))
+});
 ;
 router.get("/:storeId",verifyToken,(req,res)=>{
     storeController.getStore(req.params.storeId).then(data => res.status(200).json(data))

@@ -40,6 +40,16 @@ class StoreRepository {
         return data;
     }
 
+    async getByQuery(query) {
+        return await Store.find(
+            {
+                "$or": [
+                    { storeActivty: { $regex: query.storeActivty } }
+                ]
+            }
+        )
+    }
+
     async updateStore(store) {
         let data = {};
         try {

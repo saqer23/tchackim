@@ -22,5 +22,8 @@ class StoreController {
     async getStore(storeId) {
         return await storeService.getStore(storeId);
     }
+    async getByQuery(query) {
+        return await storeService.getByQuery(query);
+    }
 }
 module.exports = new StoreController();
