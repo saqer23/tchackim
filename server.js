@@ -25,6 +25,7 @@ const stripeRoute = require('./routes/stripe.payment.router.js');
 const roomRoute = require('./routes/room.router.js');
 const messageRoute = require('./routes/message.router.js');
 const notificationRoute = require('./routes/notification.router.js');
+const adminRoute = require('./routes/admin.js');
 
 
 require('dotenv').config()
@@ -95,6 +96,7 @@ app.use("/stripe",stripeRoute);
 app.use("/follers",follwersRoute);
 app.use("/room",roomRoute);
 app.use("/message",messageRoute);
+app.use("/admin",adminRoute);
 
 
 //error
