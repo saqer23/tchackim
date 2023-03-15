@@ -47,7 +47,7 @@ class StoreRepository {
                     { storeActivty: { $regex: query.storeActivty } }
                 ]
             }
-        )
+        ).populate({path:"packageId storeUsers storeAdminId location"});
     }
 
     async updateStore(store) {
