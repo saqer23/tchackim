@@ -74,6 +74,8 @@ class AuthService{
         const hash = bcrypt.hashSync(user.body.password, salt)
 
         const auth = {
+            phoneNo:user.body.phoneNo,
+            email:user.body.email,
             password:hash
         }
         user.body = auth
