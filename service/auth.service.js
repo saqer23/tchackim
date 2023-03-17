@@ -77,7 +77,7 @@ class AuthService{
             password:hash
         }
         user.body = auth
-        return await authRepository.updateUser(user);
+        return await authRepository.forgetPassword(user);
     }
 }
  

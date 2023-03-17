@@ -56,6 +56,21 @@ class AuthRepository {
         }
         return user1;
     }
+    async forgetPassword(user) {
+        let data = {};
+        let user1 = {};
+        try {
+            console.log(user.body.phoneNo);
+            let phoneNo = user.params.userId
+            user1 = await User.findOne({phoneNo:phoneNo})
+            user1.password = user.body.password
+            
+            await user1.save()
+        } catch(err) {
+            return {error:err}
+        }
+        return user1;
+    }
 }
 
 module.exports = new AuthRepository();
